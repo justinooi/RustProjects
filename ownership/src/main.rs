@@ -1,12 +1,18 @@
 fn main() {
-    let mut s = String::from("hello");
+    let s = String::from("hello world");
 
-    s.push_str(", world!"); // push_str() appends a literal to a String
+    println!("{}", first_word(&s));
+}
 
-    println!("{}", s); // This will print `hello, world!`
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
 
-    let s1 = String::from("hello");
-    let s2 = s1;
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
 
-    println!("{}, world!", s2);
+    println!("This is total splice: {}", &s[..]);
+    &s[..]
 }
